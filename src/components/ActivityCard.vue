@@ -72,8 +72,9 @@ export default {
 }
 
 .container .card {
+    max-width: 100%;
     position: relative;
-    max-width: 300px;
+    /* max-width: 300px; */
     height: 215px;
     background-color: #fff;
     margin: 30px 10px;
@@ -93,6 +94,7 @@ export default {
 
 
 .container .card .image {
+    max-width: 100%;
     position: relative;
     width: 260px;
     height: 260px;
