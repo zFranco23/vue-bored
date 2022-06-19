@@ -4,7 +4,7 @@ import Activities from './views/Activities.vue';
 </script>
 
 <template>
-  <Activities />
+  <router-view></router-view>
 </template>
 
 <style>

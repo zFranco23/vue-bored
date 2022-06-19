@@ -69,7 +69,6 @@ export default {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 30px;
 }
 
 .container .card {
@@ -97,9 +96,11 @@ export default {
     position: relative;
     width: 260px;
     height: 260px;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: -40%;
-    left: 8px;
+    /* left: 8px; */
     z-index: 1;
 }
 
@@ -113,6 +114,7 @@ export default {
     filter: grayscale(0)
 }
 .container .card .content {
+    max-width: 260px;
     position: relative;
     top: -140px;
     padding: 10px 15px;
