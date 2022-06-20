@@ -6,6 +6,9 @@
                     alt="random activity" 
                     :src="`https://picsum.photos/1024/819?random=${activity.key}`"
                 >
+                <button v-if="activity.editable"  class="close-button" @click="removeFavorite">
+                    X
+                </button>
             </div>
             <div class="content">
                 <h3 class="card__title">{{activity.activity}}</h3>
@@ -23,16 +26,27 @@
                     </a>
                 </div>
                 
-                <button class="btn_favorites">Add to favorites</button>
+                <button 
+                    v-if="!activity.editable" 
+                    class="btn_favorites" 
+                    @click="addFavorite"
+                >Add to favorites</button>
+                <!-- <a v-else class="link">
+                    Share 
+                    <img src="../assets/wssp-icon.png" alt="wssp icon" />
+                </a> -->
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {
-    data(){
 
+import { store } from '../store';
+
+export default {
+    data() {
+        return { store }
     },
     props: {
         activity: {
@@ -40,24 +54,15 @@ export default {
             required: true
         }
     },
-    watch : {
-        activity(prev,curr){
-            console.log(curr);
-        }
-    },
-    computed: {
-        image(){
-
+    methods: {
+        addFavorite(){
+            this.store.addFavoriteActivity(this.activity);
+            this.$emit('getActivity');
+        },
+        removeFavorite(){
+            this.store.removeFavoriteActivity(this.activity.key);
         }
     }
-    // computed :{
-    //     imageLink(){
-    //         retur
-    //     }
-    // }
-    // mounted() {
-    //     console.log(this.activity);
-    // }
 }
 </script>
 
@@ -85,13 +90,13 @@ export default {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
     transition: 0.3s ease-in-out;
     border-radius: 15px;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(250,179,252,1) 0%, rgba(196,204,205,1) 100%);
 }
 
 .container .card:hover {
     height: 330px;
 }
-
-
 
 .container .card .image {
     max-width: 100%;
@@ -162,5 +167,29 @@ export default {
 }
 .link:hover {
     border-bottom: 1px solid #333333;
+}
+.link img {
+    width:1.25rem;
+}
+.close-button {
+    z-index: 10;
+    position: absolute;
+    border: 2px solid #F2F2F2;
+    color :#F2F2F2;
+    top: 8px;
+    right : 8px;
+    cursor: pointer;
+    background: none;
+    border-radius: 100%;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    display: none;
+}
+.container .card:hover .close-button {
+    display: block;
 }
 </style>

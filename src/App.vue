@@ -1,6 +1,10 @@
-<script setup>
-import Activities from './views/Activities.vue';
-
+<script>
+import { store } from './store';
+export default {
+  data(){
+    return { activities : store.activities , hola:5}
+  }
+}
 </script>
 
 <template>

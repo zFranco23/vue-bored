@@ -6,13 +6,16 @@
             <button @click="getActivity" class="btn" :disabled="isLoading">
                 Search
             </button>
+            <button class="btn" @click="goFavorites">
+                See favorites
+            </button>
         </div>
         <div class="container__content">
             <div class="container__spinner">
                 <Spinner v-if="isLoading" />
             </div>
             <div class="container__activity">
-                <ActivityCard v-if="activity" :activity="activity" />
+                <ActivityCard @getActivity="getActivity" v-if="activity" :activity="activity" />
             </div>
         </div>
     </div>
@@ -37,26 +40,36 @@ export default {
             const activity = await getActivitiesApi();
             if (activity) this.activity = activity;
             this.isLoading = false
+        },
+        goFavorites(){
+            this.$router.push({name: 'favorites'})
         }
     },
+    created(){
+        this.getActivity();
+    }
 }
 </script>
 
 <style scoped>
-
+.title {
+    font-weight: 700;
+}
 .title,
 .subtitle {
     text-align: center;
 }
 
 .subtitle {
-    color: lightgreen;
+    color: #333333;
 }
 
 .container__btn {
+    margin-top: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
 }
 
 .btn {
