@@ -1,6 +1,6 @@
 
 
-const BASE_URL = 'http://www.boredapi.com/api/';
+const BASE_URL = 'https://www.boredapi.com/api/';
 
 
 
